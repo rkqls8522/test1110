@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <!-- 1.com.gabin.mapper.ManageMapper 인터페이스 선언
+  2. root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  3. com.gabin.mapper.manageMapper.xml 실행 작성 -->
+ <mapper namespace="com.gabin.mapper.DAWMapper">
+ 	<select id="check" resultType="com.gabin.VO.Account">
+ 		select * from DAW where free_name = #{free_name} and free_password = #{free_password}		
+ 	</select>
+ 	<insert id="deposit">
+ 		<![CDATA[
+ 			insert into DAW values(DAWseq.NEXTVAL,#{free_name},#{free_password},#{free_serial},#{deposit},
+ 			0,#{amount}+#{deposit},case when #{amount}+#{deposit} >=500 then 1 else 0 end)
+ 		]]>
+	</insert>
+ 	<insert id="withdrawal">
+ 	 	<![CDATA[
+	 		insert into DAW values(DAWseq.NEXTVAL,#{free_name},#{free_password},#{free_serial},0,#{withdrawal},
+ 			#{amount}-#{withdrawal},case when #{amount}-#{withdrawal} >=500 then 1 else 0 end)
+ 		]]>
+	</insert>
+  </mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <!-- 1.com.gabin.mapper.ManageMapper 인터페이스 선언
+  2. root-context.xml mybatis:scan 태그로 기본 패키지 지정
+  3. com.gabin.mapper.manageMapper.xml 실행 작성 -->
+ <mapper namespace="com.gabin.mapper.LoanMapper">
+ 	<select id="loan" resultType="com.gabin.VO.Account">
+ 		select * from loan where free_name = #{free_name}		
+ 	</select>
+ 	<insert id="loanwithdrawal">
+ 		insert into loan values(loanseq.NEXTVAL,#{free_name},#{loansum},#{loanwithdrawal},
+ 		#{loansum}-#{loanwithdrawal})
+	</insert>
+  </mapper>
